@@ -7,6 +7,7 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.DTO.DeviceDTO;
 
 import java.util.UUID;
 
@@ -37,5 +38,16 @@ public class Device {
     private String ip;
 
     private String mac;
+
+    public static Device fromDTO(DeviceDTO dto) {
+        return new Device(
+                dto.id(),
+                dto.name(),
+                dto.username(),
+                dto.operatingSystem(),
+                dto.ip(),
+                dto.mac()
+        );
+    }
 
 }

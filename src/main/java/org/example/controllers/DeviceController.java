@@ -1,23 +1,29 @@
 package org.example.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.example.DTO.DeviceDTO;
 import org.example.entities.Device;
+import org.example.repositories.DeviceRepository;
+import org.example.services.DeviceService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/v1/devices")
 public class DeviceController {
 
-    @PostMapping
-    public ResponseEntity<?> registerDevice(@RequestBody Device device) {
+    private final DeviceService deviceService;
 
-        return ResponseEntity.ok(device);
+    @PostMapping
+    public ResponseEntity<?> registerDevice(@RequestBody DeviceDTO deviceDTO) {
+
+        return ResponseEntity.ok(deviceService.registerDevice(deviceDTO));
 
     }
 
+    @GetMapping
+    public ResponseEntity<?> getAllDevices() {
+        return ResponseEntity.ok(deviceService.getAllDevices());
+    }
 }
